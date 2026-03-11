@@ -45,15 +45,29 @@ export default async function CheckoutPage({ searchParams }) {
   const planData = JSON.parse(JSON.stringify(plan));
 
   return (
-    <main className="min-h-screen bg-gray-50">
-      <div className="container mx-auto p-4 md:p-8 max-w-4xl">
-        <a href={`/products/${slug}`} className="text-teal-700 hover:underline text-sm font-medium mb-6 inline-block">
-          ← Back to {product.name}
-        </a>
-        <h1 className="text-3xl font-bold text-gray-900 mb-8">Checkout</h1>
-        <Suspense fallback={<div>Loading...</div>}>
-          <CheckoutClient product={productData} plan={planData} />
-        </Suspense>
+    <main className="min-h-screen bg-transparent">
+      <div className="mx-auto max-w-5xl px-4 pb-16 pt-12 md:px-6 md:pt-14">
+        <div className="mb-8 flex items-center justify-between">
+          <a
+            href={`/products/${slug}`}
+            className="inline-flex items-center gap-2 text-sm font-semibold text-cyan-100 transition hover:text-white"
+          >
+            <span className="text-lg">←</span>
+            Back to {product.name}
+          </a>
+          <span className="rounded-full border border-white/10 bg-white/5 px-3 py-1 text-[12px] font-semibold uppercase tracking-[0.18em] text-slate-200">
+            Secure checkout
+          </span>
+        </div>
+        <h1 className="font-display text-4xl font-semibold leading-tight tracking-[-0.03em] text-white sm:text-5xl">
+          Confirm your 1Fi order
+        </h1>
+        <p className="mt-3 text-slate-300">Transparent pricing, modern UI, and instant EMI confirmation.</p>
+        <div className="mt-8">
+          <Suspense fallback={<div className="text-slate-300">Loading checkout…</div>}>
+            <CheckoutClient product={productData} plan={planData} />
+          </Suspense>
+        </div>
       </div>
     </main>
   );

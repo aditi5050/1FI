@@ -2,9 +2,27 @@
 @tailwind components;
 @tailwind utilities;
 
+:root {
+  --ink: #e2e8f0;
+  --muted: #94a3b8;
+  --card: rgba(255, 255, 255, 0.04);
+  --card-border: rgba(255, 255, 255, 0.08);
+}
+
+* {
+  outline-color: #22d3ee;
+}
+
 body {
-  background-color: #F8FAFC;
-  color: #0F172A;
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Inter", "Segoe UI",
-    sans-serif;
+  font-family: var(--font-text), system-ui, -apple-system, BlinkMacSystemFont,
+    'Inter', 'Segoe UI', sans-serif;
+  background: radial-gradient(circle at 20% 20%, rgba(94, 234, 212, 0.16), transparent 35%),
+    radial-gradient(circle at 85% 10%, rgba(59, 130, 246, 0.18), transparent 35%),
+    radial-gradient(circle at 30% 80%, rgba(244, 114, 182, 0.14), transparent 30%),
+    #0b1221;
+  color: var(--ink);
+}
+
+.font-display {
+  font-family: var(--font-display), 'Space Grotesk', system-ui, sans-serif;
 }

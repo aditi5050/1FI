@@ -58,127 +58,127 @@ export default function CheckoutClient({ product, plan }) {
 
   if (success) {
     return (
-      <div className="bg-white rounded-xl p-8 shadow-sm border text-center">
-        <div className="text-5xl mb-4">🎉</div>
-        <h2 className="text-2xl font-bold text-green-700 mb-2">Pre-Order Confirmed!</h2>
-        <p className="text-gray-600 mb-1">Thank you for your order.</p>
-        <p className="text-gray-500 text-sm mb-6">We&apos;ve sent a confirmation to <strong>{email}</strong></p>
+      <div className="rounded-3xl border border-white/10 bg-white/5 p-8 text-center text-slate-100 shadow-[0_24px_80px_rgba(0,0,0,0.45)] backdrop-blur-2xl sm:p-10">
+        <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-2xl bg-gradient-to-br from-cyan-400 to-emerald-400 text-3xl shadow-[0_20px_60px_rgba(52,211,153,0.55)]">
+          🎉
+        </div>
+        <h2 className="mt-5 font-display text-3xl font-semibold text-white">Pre-order confirmed</h2>
+        <p className="mt-2 text-sm text-slate-300">
+          We sent a confirmation to <span className="font-semibold text-white">{email}</span>. Your device is locked in.
+        </p>
 
-        <div className="bg-gray-50 rounded-lg p-4 inline-block text-left mb-6">
-          <p className="font-semibold text-gray-900">{product.name}</p>
-          <p className="text-sm text-gray-600">{selectedVariant?.storage} · {selectedVariant?.color}</p>
-          <p className="text-sm text-gray-600 mt-1">
+        <div className="mt-6 inline-flex flex-col gap-2 rounded-2xl border border-white/10 bg-white/5 px-6 py-5 text-left shadow-inner">
+          <p className="font-semibold text-white">{product.name}</p>
+          <p className="text-sm text-slate-300">{selectedVariant?.storage} · {selectedVariant?.color}</p>
+          <p className="text-sm text-slate-300">
             {plan.tenureMonths} months × ₹{computed.monthlyAmount.toLocaleString('en-IN')}/mo
           </p>
         </div>
 
-        <div>
-          <a href="/" className="text-teal-700 hover:underline font-medium">← Continue Shopping</a>
+        <div className="mt-6">
+          <a href="/" className="text-sm font-semibold text-cyan-100 underline decoration-cyan-300/60 underline-offset-4 transition hover:text-white">
+            Continue shopping
+          </a>
         </div>
       </div>
     );
   }
 
   return (
-    <div className="flex flex-col lg:flex-row gap-8">
+    <div className="grid gap-8 lg:grid-cols-[minmax(0,1.1fr)_minmax(0,0.95fr)] lg:items-start">
       {/* Left: Order Summary */}
-      <div className="flex-1">
-        <div className="bg-white rounded-xl p-6 shadow-sm border">
-          <h2 className="text-xl font-bold text-gray-900 mb-4">Order Summary</h2>
+      <div className="space-y-5 rounded-3xl border border-white/10 bg-white/5 p-6 shadow-[0_20px_70px_rgba(0,0,0,0.45)] backdrop-blur-2xl sm:p-8">
+        <div className="flex items-center justify-between">
+          <h2 className="font-display text-2xl font-semibold text-white">Order summary</h2>
+          <span className="rounded-full border border-white/10 bg-white/10 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.16em] text-slate-200">
+            {plan.tenureMonths}m plan
+          </span>
+        </div>
 
-          <div className="flex gap-4 mb-6">
-            <div className="w-24 h-24 bg-gray-50 rounded-lg flex items-center justify-center shrink-0">
-              <img
-                src={product.images[selectedVariant?.imageIndex || 0]}
-                alt={product.name}
-                className="max-h-full max-w-full object-contain rounded"
-              />
-            </div>
-            <div>
-              <h3 className="font-semibold text-gray-900">{product.name}</h3>
-              <p className="text-sm text-gray-500 mt-1">{selectedVariant?.storage} · {selectedVariant?.color}</p>
-              <div className="flex items-baseline gap-2 mt-2">
-                <span className="text-lg font-bold text-gray-900">₹{price.toLocaleString('en-IN')}</span>
-                {product.mrp && product.mrp !== price && (
-                  <span className="text-sm text-gray-400 line-through">₹{product.mrp.toLocaleString('en-IN')}</span>
-                )}
-              </div>
+        <div className="flex gap-4 rounded-2xl border border-white/10 bg-white/5 p-4 shadow-inner">
+          <div className="flex h-24 w-24 items-center justify-center overflow-hidden rounded-xl bg-slate-900/60">
+            <img
+              src={product.images[selectedVariant?.imageIndex || 0]}
+              alt={product.name}
+              className="max-h-full max-w-full object-contain"
+            />
+          </div>
+          <div className="flex-1">
+            <h3 className="font-semibold text-white">{product.name}</h3>
+            <p className="text-sm text-slate-300 mt-1">{selectedVariant?.storage} · {selectedVariant?.color}</p>
+            <div className="mt-2 flex items-baseline gap-2">
+              <span className="text-xl font-semibold text-white">₹{price.toLocaleString('en-IN')}</span>
+              {product.mrp && product.mrp !== price && (
+                <span className="text-sm text-slate-500 line-through">₹{product.mrp.toLocaleString('en-IN')}</span>
+              )}
             </div>
           </div>
+        </div>
 
-          {/* Variant selector */}
-          {product.variants.length > 1 && (
-            <div className="mb-6">
-              <label className="block text-sm font-medium text-gray-700 mb-2">Select Variant</label>
-              <select
-                className="w-full border border-gray-300 rounded-md p-2 focus:border-teal-500 focus:ring-teal-500"
-                value={selectedVariantIdx}
-                onChange={(e) => setSelectedVariantIdx(parseInt(e.target.value))}
-              >
-                {product.variants.map((v, i) => (
-                  <option key={i} value={i}>{v.storage} - {v.color} (₹{v.price.toLocaleString('en-IN')})</option>
-                ))}
-              </select>
-            </div>
-          )}
+        {product.variants.length > 1 && (
+          <div>
+            <label className="block text-xs font-semibold uppercase tracking-[0.16em] text-slate-300 mb-2">Select variant</label>
+            <select
+              className="w-full rounded-xl border border-white/15 bg-slate-900/70 px-3 py-2.5 text-sm text-white shadow-inner outline-none transition focus:border-cyan-300 focus:ring-2 focus:ring-cyan-300/40"
+              value={selectedVariantIdx}
+              onChange={(e) => setSelectedVariantIdx(parseInt(e.target.value))}
+            >
+              {product.variants.map((v, i) => (
+                <option key={i} value={i} className="text-slate-900">
+                  {v.storage} - {v.color} (₹{v.price.toLocaleString('en-IN')})
+                </option>
+              ))}
+            </select>
+          </div>
+        )}
 
-          {/* EMI Breakdown */}
-          <div className="border-t pt-4">
-            <h3 className="font-semibold text-gray-900 mb-3">EMI Plan Details</h3>
-            <div className="space-y-2 text-sm">
-              <div className="flex justify-between">
-                <span className="text-gray-600">Product Price</span>
-                <span className="font-medium">₹{price.toLocaleString('en-IN')}</span>
-              </div>
-              <div className="flex justify-between">
-                <span className="text-gray-600">Down Payment</span>
-                <span className="font-medium">₹{computed.downPayment}</span>
-              </div>
-              <div className="flex justify-between">
-                <span className="text-gray-600">EMI Tenure</span>
-                <span className="font-medium">{plan.tenureMonths} months</span>
-              </div>
-              <div className="flex justify-between">
-                <span className="text-gray-600">Interest Rate</span>
-                <span className="font-medium">
-                  {plan.interestRate === 0 ? (
-                    <span className="bg-green-100 text-green-800 text-xs px-2 py-0.5 rounded-full font-semibold">0% EMI</span>
-                  ) : (
-                    `${plan.interestRate}%`
-                  )}
-                </span>
-              </div>
-              <div className="flex justify-between border-t pt-2 mt-2">
-                <span className="text-gray-900 font-semibold">Monthly EMI</span>
-                <span className="text-lg font-bold text-[#004f4a]">₹{computed.monthlyAmount.toLocaleString('en-IN')}/mo</span>
-              </div>
-            </div>
+        <div className="rounded-2xl border border-white/10 bg-white/5 p-5 text-sm text-slate-200 shadow-inner">
+          <div className="flex justify-between">
+            <span>Product price</span>
+            <span className="font-semibold text-white">₹{price.toLocaleString('en-IN')}</span>
+          </div>
+          <div className="mt-2 flex justify-between">
+            <span>Down payment</span>
+            <span className="font-semibold text-white">₹{computed.downPayment}</span>
+          </div>
+          <div className="mt-2 flex justify-between">
+            <span>EMI tenure</span>
+            <span className="font-semibold text-white">{plan.tenureMonths} months</span>
+          </div>
+          <div className="mt-2 flex justify-between">
+            <span>Interest rate</span>
+            <span className="font-semibold text-white">
+              {plan.interestRate === 0 ? '0% (no-cost)' : `${plan.interestRate}% p.a.`}
+            </span>
+          </div>
+          <div className="mt-3 flex justify-between border-t border-white/10 pt-3 text-base font-semibold text-white">
+            <span>Monthly EMI</span>
+            <span>₹{computed.monthlyAmount.toLocaleString('en-IN')}/mo</span>
           </div>
         </div>
       </div>
 
       {/* Right: Email & Confirm */}
-      <div className="lg:w-96">
-        <form onSubmit={handleSubmit} className="bg-white rounded-xl p-6 shadow-sm border">
-          <h2 className="text-xl font-bold text-gray-900 mb-4">Confirm Pre-Order</h2>
-
-          <div className="bg-[#e8f7f9] rounded-lg p-4 mb-6 border border-teal-100">
-            <div className="flex justify-between items-center">
-              <div>
-                <p className="text-xs text-gray-500 uppercase font-medium">Pay Now</p>
-                <p className="text-2xl font-bold text-[#004f4a]">₹{computed.downPayment}</p>
-              </div>
-              <div className="text-right">
-                <p className="text-xs text-gray-500 uppercase font-medium">Then</p>
-                <p className="text-lg font-bold text-gray-900">₹{computed.monthlyAmount.toLocaleString('en-IN')}/mo</p>
-                <p className="text-xs text-gray-500">× {plan.tenureMonths} months</p>
-              </div>
+      <div className="space-y-4 rounded-3xl border border-white/10 bg-white/5 p-6 shadow-[0_20px_70px_rgba(0,0,0,0.45)] backdrop-blur-2xl sm:p-7 lg:p-8">
+        <h2 className="font-display text-2xl font-semibold text-white">Confirm & pay</h2>
+        <div className="rounded-2xl border border-white/10 bg-gradient-to-r from-cyan-400/15 via-emerald-400/12 to-indigo-400/15 px-4 py-4 text-slate-100 shadow-inner">
+          <div className="flex items-center justify-between">
+            <div>
+              <p className="text-[11px] uppercase tracking-[0.16em] text-slate-200">Pay now</p>
+              <p className="text-3xl font-semibold text-white">₹{computed.downPayment}</p>
+            </div>
+            <div className="text-right">
+              <p className="text-[11px] uppercase tracking-[0.16em] text-slate-200">Then</p>
+              <p className="text-lg font-semibold text-white">₹{computed.monthlyAmount.toLocaleString('en-IN')}/mo</p>
+              <p className="text-xs text-slate-200">× {plan.tenureMonths} months</p>
             </div>
           </div>
+        </div>
 
-          <div className="mb-6">
-            <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-2">
-              Email Address
+        <form onSubmit={handleSubmit} className="space-y-4">
+          <div>
+            <label htmlFor="email" className="block text-xs font-semibold uppercase tracking-[0.16em] text-slate-300 mb-2">
+              Email address
             </label>
             <input
               type="email"
@@ -187,13 +187,13 @@ export default function CheckoutClient({ product, plan }) {
               placeholder="you@example.com"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              className="w-full border border-gray-300 rounded-md p-3 focus:border-teal-500 focus:ring-teal-500 focus:outline-none"
+              className="w-full rounded-xl border border-white/15 bg-slate-900/70 px-3 py-3 text-sm text-white shadow-inner outline-none transition focus:border-cyan-300 focus:ring-2 focus:ring-cyan-300/40"
             />
-            <p className="text-xs text-gray-400 mt-1">We&apos;ll send order confirmation to this email.</p>
+            <p className="mt-1 text-xs text-slate-400">We’ll send your confirmation and payment link here.</p>
           </div>
 
           {error && (
-            <div className="mb-4 p-3 bg-red-50 border border-red-200 rounded-md text-sm text-red-700">
+            <div className="rounded-xl border border-red-400/40 bg-red-500/10 px-3 py-3 text-sm text-red-100">
               {error}
             </div>
           )}
@@ -201,13 +201,13 @@ export default function CheckoutClient({ product, plan }) {
           <button
             type="submit"
             disabled={submitting}
-            className="w-full bg-[#004f4a] text-white py-4 rounded-lg font-bold text-lg hover:bg-[#003d39] transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+            className="flex w-full items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-cyan-400 via-emerald-400 to-lime-300 px-5 py-3 text-base font-semibold text-slate-950 shadow-[0_22px_70px_rgba(52,211,153,0.6)] transition-all duration-150 hover:-translate-y-0.5 hover:shadow-[0_28px_90px_rgba(52,211,153,0.72)] disabled:cursor-not-allowed disabled:opacity-60"
           >
-            {submitting ? 'Processing...' : `Confirm & Pay ₹${computed.downPayment}`}
+            {submitting ? 'Processing…' : `Confirm & pay ₹${computed.downPayment}`}
           </button>
 
-          <p className="text-xs text-gray-400 text-center mt-3">
-            By confirming, you agree to the EMI terms for {plan.tenureMonths} months at ₹{computed.monthlyAmount.toLocaleString('en-IN')}/mo.
+          <p className="text-center text-xs text-slate-400">
+            By confirming, you accept the EMI schedule of ₹{computed.monthlyAmount.toLocaleString('en-IN')}/mo for {plan.tenureMonths} months.
           </p>
         </form>
       </div>

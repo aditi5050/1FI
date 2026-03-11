@@ -34,7 +34,7 @@ export default async function ProductPage({ params }) {
   const emiData = JSON.parse(JSON.stringify(emiPlans));
 
   return (
-    <main className="container mx-auto p-4 md:p-8">
+    <main className="mx-auto max-w-6xl px-4 pb-16 pt-10 md:px-6 md:pt-14">
       <ProductClient initialProduct={productData} initialEmiPlans={emiData} />
     </main>
   );
