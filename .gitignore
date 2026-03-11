@@ -1,0 +1,40 @@
+# dependencies
+node_modules/
+
+# next.js
+.next/
+out/
+
+# production build
+build/
+dist/
+
+# env files (keep .env.example committed)
+.env
+.env.local
+.env.production
+.env.*.local
+
+# debug logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# testing
+coverage/
+cypress/videos/
+cypress/screenshots/
+
+# misc
+*.tsbuildinfo
+package-lock.json

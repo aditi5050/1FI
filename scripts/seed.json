@@ -1,0 +1,49 @@
+{
+  "products": [
+    {
+      "name": "Apple iPhone 17 Pro",
+      "slug": "iphone-17-pro",
+      "description": "Apple iPhone 17 Pro (Deep Blue, 256 GB)",
+      "mrp": 149900,
+      "price": 134900,
+      "images": [
+        "/assets/iphone17pro-1.jpg",
+        "/assets/iphone17pro-2.jpg",
+        "/assets/iphone17pro-side.jpg"
+      ],
+      "variants": [
+        { "sku": "IP17P-256-DB", "color": "Deep Blue", "storage": "256 GB", "price": 134900, "imageIndex": 0 },
+        { "sku": "IP17P-512-DB", "color": "Deep Blue", "storage": "512 GB", "price": 154900, "imageIndex": 1 }
+      ]
+    },
+    {
+      "name": "Samsung S24 Ultra",
+      "slug": "samsung-s24-ultra",
+      "description": "Samsung Galaxy S24 Ultra (Black, 256 GB)",
+      "mrp": 124999,
+      "price": 114999,
+      "images": ["/assets/s24u-1.jpg","/assets/s24u-2.jpg"],
+      "variants": [
+        { "sku": "S24U-256-BL", "color": "Black", "storage": "256 GB", "price": 114999, "imageIndex": 0 },
+        { "sku": "S24U-512-BL", "color": "Black", "storage": "512 GB", "price": 129999, "imageIndex": 1 }
+      ]
+    },
+    {
+      "name": "OnePlus Nova",
+      "slug": "oneplus-nova",
+      "description": "OnePlus Nova (Green, 128 GB)",
+      "mrp": 49999,
+      "price": 43999,
+      "images": ["/assets/oneplus-nova-1.jpg","/assets/oneplus-nova-2.jpg"],
+      "variants": [
+        { "sku": "ON-128-GR", "color": "Green", "storage": "128 GB", "price": 43999, "imageIndex": 0 },
+        { "sku": "ON-256-GR", "color": "Green", "storage": "256 GB", "price": 48999, "imageIndex": 1 }
+      ]
+    }
+  ],
+  "emiplans": [
+    { "name": "6 months EMI", "tenureMonths": 6, "interestRate": 0.0, "downPayment": 19 },
+    { "name": "9 months EMI", "tenureMonths": 9, "interestRate": 0.0, "downPayment": 19 },
+    { "name": "12 months EMI", "tenureMonths": 12, "interestRate": 0.0, "downPayment": 19 }
+  ]
+}

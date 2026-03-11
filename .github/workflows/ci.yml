@@ -1,0 +1,47 @@
+name: CI / CD
+
+on:
+  push:
+    branches: [ "main", "master" ]
+  pull_request:
+    branches: [ "main", "master" ]
+
+jobs:
+  build_and_test:
+    runs-on: ubuntu-latest
+
+    env:
+      MONGODB_URI: ${{ secrets.MONGODB_URI }}
+      NEXT_PUBLIC_API_BASE: http://localhost:3000/api
+
+    steps:
+    - uses: actions/checkout@v3
+
+    - name: Use Node.js 18.x
+      uses: actions/setup-node@v3
+      with:
+        node-version: 18.x
+
+    - name: Install Root Dependencies
+      run: npm ci
+
+    - name: Install Web Dependencies
+      run: cd apps/web && npm ci
+
+    - name: Lint
+      run: cd apps/web && npm run lint
+
+    - name: Run Unit Tests (Jest)
+      run: npm run test
+
+    - name: Build Web
+      run: cd apps/web && npm run build
+
+    - name: Start Server & Run Cypress E2E
+      uses: cypress-io/github-action@v6
+      with:
+        working-directory: apps/web
+        start: npm run start
+        wait-on: 'http://localhost:3000'
+        wait-on-timeout: 60
+        browser: chrome
