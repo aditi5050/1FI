@@ -26,3 +26,24 @@ body {
 .font-display {
   font-family: var(--font-display), 'Space Grotesk', system-ui, sans-serif;
 }
+
+.shimmer-text {
+  background: linear-gradient(120deg, #a5f3fc, #bbf7d0, #bef264, #a5f3fc);
+  background-size: 240% 240%;
+  color: transparent;
+  -webkit-background-clip: text;
+  background-clip: text;
+  animation: shimmer 6s ease-in-out infinite;
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
