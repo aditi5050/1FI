@@ -45,30 +45,10 @@ export default async function CheckoutPage({ searchParams }) {
   const planData = JSON.parse(JSON.stringify(plan));
 
   return (
-    <main className="min-h-screen bg-transparent">
-      <div className="mx-auto max-w-5xl px-4 pb-16 pt-24 md:px-6 md:pt-28">
-        <div className="mb-8 flex items-center justify-between">
-          <a
-            href={`/products/${slug}`}
-            className="inline-flex items-center gap-2 text-sm font-semibold text-emerald-700 transition hover:text-emerald-900"
-          >
-            <span className="text-lg">←</span>
-            Back to {product.name}
-          </a>
-          <span className="rounded-full border border-emerald-100 bg-emerald-50 px-3 py-1 text-[12px] font-semibold uppercase tracking-[0.18em] text-emerald-700">
-            Secure checkout
-          </span>
-        </div>
-        <h1 className="font-display text-4xl font-semibold leading-tight tracking-[-0.03em] text-slate-900 sm:text-5xl">
-          Confirm your 1Fi order
-        </h1>
-        <p className="mt-3 text-slate-600">Transparent pricing, modern UI, and instant EMI confirmation.</p>
-        <div className="mt-8">
-          <Suspense fallback={<div className="text-slate-300">Loading checkout…</div>}>
-            <CheckoutClient product={productData} plan={planData} />
-          </Suspense>
-        </div>
-      </div>
+    <main className="min-h-screen bg-[linear-gradient(180deg,#f8fbfd_0%,#ffffff_26%,#ffffff_100%)] pt-24 md:pt-28">
+      <Suspense fallback={<div className="px-4 py-12 text-slate-300">Loading checkout…</div>}>
+        <CheckoutClient product={productData} plan={planData} />
+      </Suspense>
     </main>
   );
 }
