@@ -1,5 +1,6 @@
 import './globals.css'
 import { Manrope, Space_Grotesk } from 'next/font/google'
+import Header from './components/Header'
 
 const textFont = Manrope({
   subsets: ['latin'],
@@ -23,7 +24,10 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en" className={`${textFont.variable} ${displayFont.variable}`}>
-      <body className="antialiased bg-slate-950 text-slate-50">{children}</body>
+      <body className="antialiased bg-white text-slate-900">
+        <Header />
+        {children}
+      </body>
     </html>
   )
 }

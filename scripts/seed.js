@@ -10,7 +10,7 @@ const path = require('path');
 // Disable buffering so operations fail fast if not connected
 mongoose.set('bufferCommands', false);
 
-const seedData = JSON.parse(fs.readFileSync(path.join(__dirname, 'seed.json'), 'utf-8'));
+const seedConfig = JSON.parse(fs.readFileSync(path.join(__dirname, 'seed.json'), 'utf-8'));
 
 const uri = process.env.MONGODB_URI || 'mongodb+srv://Armaanahuja2707:Armaanahuja2707@cluster0.jb9jy3v.mongodb.net/1fi-store?retryWrites=true&w=majority&appName=Cluster0';
 
@@ -28,7 +28,8 @@ const ProductSchema = new mongoose.Schema({
     color: String,
     storage: String,
     price: Number,
-    imageIndex: Number
+    imageIndex: Number,
+    galleryImageIndices: [Number]
   }],
   createdAt: { type: Date, default: Date.now }
 });
@@ -41,6 +42,75 @@ const EMIPlanSchema = new mongoose.Schema({
   cashback: { type: Number, default: 0 },
   downPayment: { type: Number, default: 0 }
 });
+
+function buildSku(slug, storage = '', color = '', index = 0) {
+  const slugCode = slug.replace(/-/g, '').toUpperCase().slice(0, 8) || 'PRODUCT';
+  const storageCode = storage.replace(/\s+/g, '').toUpperCase() || 'STD';
+  const colorCode = color.replace(/[^A-Za-z0-9]/g, '').toUpperCase().slice(0, 4) || `C${index + 1}`;
+  return `${slugCode}-${storageCode}-${colorCode}-${index + 1}`;
+}
+
+function normalizeProduct(product) {
+  const variants = Array.isArray(product.variants) ? product.variants : [];
+  const discoveredVariantImages = variants.flatMap((variant) => {
+    const variantImages = Array.isArray(variant.images) ? variant.images.filter(Boolean) : [];
+    const declaredImage = typeof variant.image === 'string' ? [variant.image] : [];
+    return [...declaredImage, ...variantImages];
+  });
+  const baseImages = [...new Set([...(Array.isArray(product.images) ? product.images : []), ...discoveredVariantImages])];
+
+  if (variants.length === 0) {
+    return product;
+  }
+
+  const normalizedVariants = variants.map((variant, index) => {
+    const variantImages = Array.isArray(variant.images) ? variant.images.filter(Boolean) : [];
+    const declaredImage = typeof variant.image === 'string' ? variant.image : '';
+    const fallbackImage = baseImages[variant.imageIndex ?? index] || baseImages[index] || baseImages[0] || '';
+    const galleryImages = [...new Set([declaredImage, ...variantImages, fallbackImage].filter(Boolean))];
+
+    const imageIndex = galleryImages[0] ? baseImages.indexOf(galleryImages[0]) : Number(variant.imageIndex || 0);
+    const explicitGalleryIndices = Array.isArray(variant.galleryImageIndices)
+      ? variant.galleryImageIndices.filter((imageIdx) => Number.isInteger(imageIdx) && baseImages[imageIdx])
+      : [];
+    const derivedGalleryIndices = galleryImages
+      .map((image) => baseImages.indexOf(image))
+      .filter((imageIdx) => imageIdx >= 0);
+    const fallbackGalleryIndices = imageIndex >= 0
+      ? [imageIndex, ...baseImages.map((_, imageIdx) => imageIdx).filter((imageIdx) => imageIdx !== imageIndex)]
+      : baseImages.map((_, imageIdx) => imageIdx);
+    const galleryImageIndices = explicitGalleryIndices.length
+      ? [...new Set(explicitGalleryIndices)]
+      : variantImages.length > 0
+        ? [...new Set(derivedGalleryIndices)]
+        : fallbackGalleryIndices;
+
+    return {
+      sku: variant.sku || buildSku(product.slug || product.name || 'product', variant.storage || 'STD', variant.color || 'COLOR', index),
+      color: variant.color,
+      storage: variant.storage,
+      mrp: variant.mrp,
+      price: variant.price,
+      imageIndex,
+      galleryImageIndices,
+    };
+  });
+
+  const priceValues = normalizedVariants
+    .map((variant) => Number(variant.price))
+    .filter((value) => Number.isFinite(value) && value > 0);
+
+  return {
+    ...product,
+    description:
+      product.description ||
+      `${product.name} (${normalizedVariants[0]?.color || 'Standard'}, ${normalizedVariants[0]?.storage || 'Standard'})`,
+    mrp: Number(product.mrp || normalizedVariants[0]?.price || 0),
+    price: Number(product.price || Math.min(...priceValues, Number(product.price || 0))),
+    images: baseImages,
+    variants: normalizedVariants,
+  };
+}
 
 async function seed() {
   console.log('Connecting to MongoDB...');
@@ -57,8 +127,8 @@ async function seed() {
   await EMIPlan.deleteMany({});
   console.log('Cleared existing data');
 
-  await Product.insertMany(seedData.products);
-  await EMIPlan.insertMany(seedData.emiplans);
+  await Product.insertMany(seedConfig.products.map(normalizeProduct));
+  await EMIPlan.insertMany(seedConfig.emiplans);
   console.log('Inserted seed data successfully');
 
   await mongoose.disconnect();

@@ -3,41 +3,84 @@
     {
       "name": "Apple iPhone 17 Pro",
       "slug": "iphone-17-pro",
-      "description": "Apple iPhone 17 Pro (Deep Blue, 256 GB)",
+      "description": "Apple iPhone 17 Pro",
       "mrp": 149900,
       "price": 134900,
       "images": [
-        "/assets/iphone17pro-1.jpg",
-        "/assets/iphone17pro-2.jpg",
-        "/assets/iphone17pro-side.jpg"
+        "/assets/iphone17proall.png",
+        "/assets/iphone17problack.png",
+        "/assets/iphone17proorange.png",
+        "/assets/iphone17prowhite.png"
       ],
       "variants": [
-        { "sku": "IP17P-256-DB", "color": "Deep Blue", "storage": "256 GB", "price": 134900, "imageIndex": 0 },
-        { "sku": "IP17P-512-DB", "color": "Deep Blue", "storage": "512 GB", "price": 154900, "imageIndex": 1 }
+        
+        { "sku": "IP17P-256-BK", "color": "Black", "storage": "256 GB", "price": 134900, "imageIndex": 1 },
+        { "sku": "IP17P-512-BK", "color": "Black", "storage": "512 GB", "price": 154900, "imageIndex": 1 },
+        { "sku": "IP17P-256-OR", "color": "Orange", "storage": "256 GB", "price": 134900, "imageIndex": 2 },
+        { "sku": "IP17P-512-OR", "color": "Orange", "storage": "512 GB", "price": 154900, "imageIndex": 2 },
+        { "sku": "IP17P-256-WH", "color": "White", "storage": "256 GB", "price": 134900, "imageIndex": 3 },
+        { "sku": "IP17P-512-WH", "color": "White", "storage": "512 GB", "price": 154900, "imageIndex": 3 }
       ]
     },
     {
       "name": "Samsung S24 Ultra",
       "slug": "samsung-s24-ultra",
-      "description": "Samsung Galaxy S24 Ultra (Black, 256 GB)",
+      "description": "Samsung Galaxy S24 Ultra",
       "mrp": 124999,
       "price": 114999,
-      "images": ["/assets/s24u-1.jpg","/assets/s24u-2.jpg"],
+      "images": [
+        "/assets/s241_.png",
+        "/assets/s24_3.png",
+        "/assets/s24_2.png"
+      ],
       "variants": [
-        { "sku": "S24U-256-BL", "color": "Black", "storage": "256 GB", "price": 114999, "imageIndex": 0 },
-        { "sku": "S24U-512-BL", "color": "Black", "storage": "512 GB", "price": 129999, "imageIndex": 1 }
+        { "sku": "S24U-256-SL", "color": "Titanium Silver", "storage": "256 GB", "mrp": 124999, "price": 114999, "image": "/assets/s241_.png" },
+        { "sku": "S24U-512-SL", "color": "Titanium Silver", "storage": "512 GB", "mrp": 139999, "price": 129999, "image": "/assets/s241_.png" },
+        { "sku": "S24U-256-GD", "color": "Titanium Gold", "storage": "256 GB", "mrp": 124999, "price": 114999, "image": "/assets/s24_2.png" },
+        { "sku": "S24U-512-GD", "color": "Titanium Gold", "storage": "512 GB", "mrp": 139999, "price": 129999, "image": "/assets/s24_2.png" },
+        { "sku": "S24U-256-VT", "color": "Titanium Violet", "storage": "256 GB", "mrp": 124999, "price": 114999, "image": "/assets/s24_3.png" },
+        { "sku": "S24U-512-VT", "color": "Titanium Violet", "storage": "512 GB", "mrp": 139999, "price": 129999, "image": "/assets/s24_3.png" }
       ]
     },
     {
-      "name": "OnePlus Nova",
-      "slug": "oneplus-nova",
-      "description": "OnePlus Nova (Green, 128 GB)",
-      "mrp": 49999,
-      "price": 43999,
-      "images": ["/assets/oneplus-nova-1.jpg","/assets/oneplus-nova-2.jpg"],
+      "name": "Samsung S26 Ultra",
+      "slug": "samsung-s26-ultra",
+      "description": "Samsung Galaxy S26 Ultra",
+      "mrp": 124999,
+      "price": 114999,
+      "images": [
+        "/assets/s26blue.png",
+        "/assets/s26ultrablack.png",
+        "/assets/s26ultrasilver.png",
+        "/assets/s26ultrapink.png"
+      ],
       "variants": [
-        { "sku": "ON-128-GR", "color": "Green", "storage": "128 GB", "price": 43999, "imageIndex": 0 },
-        { "sku": "ON-256-GR", "color": "Green", "storage": "256 GB", "price": 48999, "imageIndex": 1 }
+        { "sku": "S26U-256-BK", "color": "Black", "storage": "256 GB", "mrp": 124999, "price": 114999, "image": "/assets/s26ultrablack.png" },
+        { "sku": "S26U-512-BK", "color": "Black", "storage": "512 GB", "mrp": 139999, "price": 129999, "image": "/assets/s26ultrablack.png" },
+        { "sku": "S26U-256-BL", "color": "Blue", "storage": "256 GB", "mrp": 124999, "price": 114999, "image": "/assets/s26blue.png" },
+        { "sku": "S26U-512-BL", "color": "Blue", "storage": "512 GB", "mrp": 139999, "price": 129999, "image": "/assets/s26blue.png" },
+        { "sku": "S26U-256-SL", "color": "Silver", "storage": "256 GB", "mrp": 124999, "price": 114999, "image": "/assets/s26ultrasilver.png" },
+        { "sku": "S26U-512-SL", "color": "Silver", "storage": "512 GB", "mrp": 139999, "price": 129999, "image": "/assets/s26ultrasilver.png" },
+        { "sku": "S26U-256-PK", "color": "Pink", "storage": "256 GB", "mrp": 124999, "price": 114999, "image": "/assets/s26ultrapink.png" },
+        { "sku": "S26U-512-PK", "color": "Pink", "storage": "512 GB", "mrp": 139999, "price": 129999, "image": "/assets/s26ultrapink.png" }
+      ]
+    },
+    {
+      "name": "Vivo V60e 5G",
+      "slug": "vivo-v60e-5g",
+      "description": "vivo V60e 5G (Noble Gold, 8GB RAM, 256GB Storage) with No Cost EMI/Additional Exchange Offers",
+      "mrp": 39999,
+      "price": 33999,
+      "images": ["/assets/vivopink.png",
+                 "/assets/vivov60gold.png",
+                 "/assets/vivov60egold.png",
+                 "/assets/vivov60pink1.png"
+                ],
+      "variants": [
+        { "sku": "V60E-128-PK", "color": "Pink", "storage": "128 GB", "price": 33999, "imageIndex": 1 },
+        { "sku": "V60E-256-PK", "color": "Pink", "storage": "256 GB", "price": 35999, "imageIndex": 1 },
+        { "sku": "V60E-128-GD", "color": "Gold", "storage": "128 GB", "price": 33999, "imageIndex": 2 },
+        { "sku": "V60E-256-GD", "color": "Gold", "storage": "256 GB", "price": 35999, "imageIndex": 2 }
       ]
     }
   ],

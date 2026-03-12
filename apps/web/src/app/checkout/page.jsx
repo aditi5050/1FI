@@ -15,10 +15,10 @@ export default async function CheckoutPage({ searchParams }) {
   if (!slug || !tenure) {
     return (
       <main className="min-h-screen flex items-center justify-center">
-        <div className="text-center p-8">
-          <h1 className="text-2xl font-bold text-red-600 mb-2">Invalid Checkout</h1>
-          <p className="text-gray-600">Missing product or EMI plan information.</p>
-          <a href="/" className="mt-4 inline-block text-teal-700 underline font-medium">← Back to products</a>
+        <div className="p-8 text-center">
+          <h1 className="mb-2 text-2xl font-bold text-red-600">Invalid Checkout</h1>
+          <p className="text-slate-600">Missing product or EMI plan information.</p>
+          <a href="/" className="mt-4 inline-block font-medium text-emerald-700 underline">← Back to products</a>
         </div>
       </main>
     );
@@ -31,10 +31,10 @@ export default async function CheckoutPage({ searchParams }) {
   if (!product || !plan) {
     return (
       <main className="min-h-screen flex items-center justify-center">
-        <div className="text-center p-8">
-          <h1 className="text-2xl font-bold text-red-600 mb-2">Not Found</h1>
-          <p className="text-gray-600">Could not find the selected product or EMI plan.</p>
-          <a href="/" className="mt-4 inline-block text-teal-700 underline font-medium">← Back to products</a>
+        <div className="p-8 text-center">
+          <h1 className="mb-2 text-2xl font-bold text-red-600">Not Found</h1>
+          <p className="text-slate-600">Could not find the selected product or EMI plan.</p>
+          <a href="/" className="mt-4 inline-block font-medium text-emerald-700 underline">← Back to products</a>
         </div>
       </main>
     );
@@ -46,23 +46,23 @@ export default async function CheckoutPage({ searchParams }) {
 
   return (
     <main className="min-h-screen bg-transparent">
-      <div className="mx-auto max-w-5xl px-4 pb-16 pt-12 md:px-6 md:pt-14">
+      <div className="mx-auto max-w-5xl px-4 pb-16 pt-24 md:px-6 md:pt-28">
         <div className="mb-8 flex items-center justify-between">
           <a
             href={`/products/${slug}`}
-            className="inline-flex items-center gap-2 text-sm font-semibold text-cyan-100 transition hover:text-white"
+            className="inline-flex items-center gap-2 text-sm font-semibold text-emerald-700 transition hover:text-emerald-900"
           >
             <span className="text-lg">←</span>
             Back to {product.name}
           </a>
-          <span className="rounded-full border border-white/10 bg-white/5 px-3 py-1 text-[12px] font-semibold uppercase tracking-[0.18em] text-slate-200">
+          <span className="rounded-full border border-emerald-100 bg-emerald-50 px-3 py-1 text-[12px] font-semibold uppercase tracking-[0.18em] text-emerald-700">
             Secure checkout
           </span>
         </div>
-        <h1 className="font-display text-4xl font-semibold leading-tight tracking-[-0.03em] text-white sm:text-5xl">
+        <h1 className="font-display text-4xl font-semibold leading-tight tracking-[-0.03em] text-slate-900 sm:text-5xl">
           Confirm your 1Fi order
         </h1>
-        <p className="mt-3 text-slate-300">Transparent pricing, modern UI, and instant EMI confirmation.</p>
+        <p className="mt-3 text-slate-600">Transparent pricing, modern UI, and instant EMI confirmation.</p>
         <div className="mt-8">
           <Suspense fallback={<div className="text-slate-300">Loading checkout…</div>}>
             <CheckoutClient product={productData} plan={planData} />

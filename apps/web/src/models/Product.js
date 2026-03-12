@@ -14,7 +14,8 @@ const ProductSchema = new mongoose.Schema({
       color: String,
       storage: String,
       price: Number,
-      imageIndex: Number // index into images[]
+      imageIndex: Number, // index into images[]
+      galleryImageIndices: [Number]
     }
   ],
   createdAt: { type: Date, default: Date.now }

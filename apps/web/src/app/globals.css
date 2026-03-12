@@ -3,23 +3,20 @@
 @tailwind utilities;
 
 :root {
-  --ink: #e2e8f0;
-  --muted: #94a3b8;
-  --card: rgba(255, 255, 255, 0.04);
-  --card-border: rgba(255, 255, 255, 0.08);
+  --ink: #0f172a;
+  --muted: #64748b;
+  --card: #ffffff;
+  --card-border: rgba(15, 23, 42, 0.06);
 }
 
 * {
-  outline-color: #22d3ee;
+  outline-color: #0ea5e9;
 }
 
 body {
   font-family: var(--font-text), system-ui, -apple-system, BlinkMacSystemFont,
     'Inter', 'Segoe UI', sans-serif;
-  background: radial-gradient(circle at 20% 20%, rgba(94, 234, 212, 0.16), transparent 35%),
-    radial-gradient(circle at 85% 10%, rgba(59, 130, 246, 0.18), transparent 35%),
-    radial-gradient(circle at 30% 80%, rgba(244, 114, 182, 0.14), transparent 30%),
-    #0b1221;
+  background: #ffffff;
   color: var(--ink);
 }
 
