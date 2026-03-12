@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server';
-import dbConnect from '../../../lib/mongoose';
-import EMIPlan from '../../../models/EMIPlan';
+import dbConnect from '../../../lib/db/mongoose';
+import EMIPlan from '../../../lib/db/models/EMIPlan';
 
 export async function GET(request) {
   try {

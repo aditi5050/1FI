@@ -7,9 +7,9 @@ const mockPlans = [
   { name: '12 months EMI', tenureMonths: 12, interestRate: 0, downPayment: 19 },
 ];
 
-jest.mock('@/lib/mongoose', () => jest.fn().mockResolvedValue({}));
+jest.mock('@/lib/db/mongoose', () => jest.fn().mockResolvedValue({}));
 
-jest.mock('@/models/EMIPlan', () => ({
+jest.mock('@/lib/db/models/EMIPlan', () => ({
   find: jest.fn().mockReturnValue({
     lean: jest.fn().mockResolvedValue([
       { name: '6 months EMI', tenureMonths: 6, interestRate: 0, downPayment: 19 },

@@ -19,23 +19,23 @@ const mockPlan = {
   downPayment: 19,
 };
 
-jest.mock('@/lib/mongoose', () => jest.fn().mockResolvedValue({}));
+jest.mock('@/lib/db/mongoose', () => jest.fn().mockResolvedValue({}));
 
-jest.mock('@/models/Product', () => ({
+jest.mock('@/lib/db/models/Product', () => ({
   findOne: jest.fn().mockImplementation(({ slug }) => {
     if (slug === 'iphone-17-pro') return Promise.resolve(mockProduct);
     return Promise.resolve(null);
   }),
 }));
 
-jest.mock('@/models/EMIPlan', () => ({
+jest.mock('@/lib/db/models/EMIPlan', () => ({
   findOne: jest.fn().mockImplementation(({ tenureMonths }) => {
     if (tenureMonths === 6) return Promise.resolve(mockPlan);
     return Promise.resolve(null);
   }),
 }));
 
-jest.mock('@/models/PreOrder', () => ({
+jest.mock('@/lib/db/models/PreOrder', () => ({
   create: jest.fn().mockImplementation((data) =>
     Promise.resolve({ _id: '6600000000000000000000bb', ...data, createdAt: new Date().toISOString() })
   ),

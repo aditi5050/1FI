@@ -1,8 +1,8 @@
 import { NextResponse } from 'next/server';
-import dbConnect from '../../../lib/mongoose';
-import PreOrder from '../../../models/PreOrder';
-import Product from '../../../models/Product';
-import EMIPlan from '../../../models/EMIPlan';
+import dbConnect from '../../../lib/db/mongoose';
+import PreOrder from '../../../lib/db/models/PreOrder';
+import Product from '../../../lib/db/models/Product';
+import EMIPlan from '../../../lib/db/models/EMIPlan';
 
 export async function POST(request) {
   try {

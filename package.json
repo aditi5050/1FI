@@ -6,11 +6,8 @@
     "dev": "npm run dev --prefix apps/web",
     "build": "npm run build --prefix apps/web",
     "start": "npm run start --prefix apps/web",
-    "seed": "node scripts/seed.js",
+    "seed": "node apps/web/scripts/seed.js",
     "test": "npm run test --prefix apps/web",
     "cypress": "npm run cypress:open --prefix apps/web"
-  },
-  "dependencies": {
-    "mongoose": "^8.2.1"
   }
 }

@@ -27,6 +27,10 @@
 /project-root
   /apps
     /web                          # Next.js fullstack application
+      /scripts
+        seed.js                   # Database seed runner
+        /data
+          seed.json               # Seed data used by the runner
       /src
         /app
           /api
@@ -40,20 +44,18 @@
           page.jsx                # Homepage — product listing
           globals.css             # Tailwind base styles
         /lib
-          mongoose.js             # Cached DB connection helper
-        /models
-          Product.js              # Mongoose Product schema
-          EMIPlan.js              # Mongoose EMIPlan schema
-          PreOrder.js             # Mongoose PreOrder schema
+          /db
+            mongoose.js           # Cached DB connection helper
+            /models
+              Product.js          # Mongoose Product schema
+              EMIPlan.js          # Mongoose EMIPlan schema
+              PreOrder.js         # Mongoose PreOrder schema
       /public/assets              # Product images
       /__tests__/api              # Jest unit tests
       /cypress/e2e                # Cypress e2e specs
   /infra
     docker-compose.yml            # Docker services (web + mongo)
     Dockerfile.web                # Next.js container
-  /scripts
-    seed.js                       # Database seed script
-    seed.json                     # Seed data (3 products, 3 EMI plans)
   /.github/workflows
     ci.yml                        # CI pipeline (build + test)
   README.md

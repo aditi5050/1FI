@@ -1,4 +1,4 @@
-// scripts/seed.js
+// apps/web/scripts/seed.js
 // Fix for Windows DNS issues with SRV records — MUST be first
 const dns = require('dns');
 dns.setServers(['8.8.8.8', '8.8.4.4']);
@@ -10,9 +10,46 @@ const path = require('path');
 // Disable buffering so operations fail fast if not connected
 mongoose.set('bufferCommands', false);
 
-const seedConfig = JSON.parse(fs.readFileSync(path.join(__dirname, 'seed.json'), 'utf-8'));
+function loadEnvFile(filePath, overrideExisting = false) {
+  if (!fs.existsSync(filePath)) {
+    return;
+  }
 
-const uri = process.env.MONGODB_URI || 'mongodb+srv://Armaanahuja2707:Armaanahuja2707@cluster0.jb9jy3v.mongodb.net/1fi-store?retryWrites=true&w=majority&appName=Cluster0';
+  const lines = fs.readFileSync(filePath, 'utf-8').split(/\r?\n/);
+
+  for (const line of lines) {
+    const trimmed = line.trim();
+
+    if (!trimmed || trimmed.startsWith('#')) {
+      continue;
+    }
+
+    const separatorIndex = trimmed.indexOf('=');
+    if (separatorIndex === -1) {
+      continue;
+    }
+
+    const key = trimmed.slice(0, separatorIndex).trim();
+    const rawValue = trimmed.slice(separatorIndex + 1).trim();
+    const value = rawValue.replace(/^['\"]|['\"]$/g, '');
+
+    if (overrideExisting || process.env[key] === undefined) {
+      process.env[key] = value;
+    }
+  }
+}
+
+const appRoot = path.resolve(__dirname, '..');
+loadEnvFile(path.join(appRoot, '.env'));
+loadEnvFile(path.join(appRoot, '.env.local'), true);
+
+const seedConfig = JSON.parse(fs.readFileSync(path.join(__dirname, 'data', 'seed.json'), 'utf-8'));
+
+const uri = process.env.MONGODB_URI?.trim().replace(/^["']|["']$/g, '');
+
+if (!uri) {
+  throw new Error('Missing MONGODB_URI. Add it to apps/web/.env or export it before running npm run seed.');
+}
 
 // Define schemas inline to avoid import issues
 const ProductSchema = new mongoose.Schema({

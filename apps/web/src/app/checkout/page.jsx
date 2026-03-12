@@ -1,7 +1,7 @@
 import { Suspense } from 'react';
-import dbConnect from '../../lib/mongoose';
-import Product from '../../models/Product';
-import EMIPlan from '../../models/EMIPlan';
+import dbConnect from '../../lib/db/mongoose';
+import Product from '../../lib/db/models/Product';
+import EMIPlan from '../../lib/db/models/EMIPlan';
 import CheckoutClient from './CheckoutClient';
 
 export const metadata = {

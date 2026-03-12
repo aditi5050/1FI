@@ -8,9 +8,9 @@ const mockProduct = {
   price: 999
 };
 
-jest.mock('@/lib/mongoose', () => jest.fn().mockResolvedValue({}));
+jest.mock('@/lib/db/mongoose', () => jest.fn().mockResolvedValue({}));
 
-jest.mock('@/models/Product', () => ({
+jest.mock('@/lib/db/models/Product', () => ({
   findOne: jest.fn().mockImplementation(({ slug }) => {
     if (slug === 'test-product') return Promise.resolve(mockProduct);
     return Promise.resolve(null);

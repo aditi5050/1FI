@@ -309,7 +309,7 @@ export default function CheckoutClient({ product, plan }) {
                     onChange={(event) => setEmail(event.target.value)}
                     className="w-full rounded-[1.25rem] border border-slate-200 bg-[#f8f9fa] px-5 py-4 text-base font-semibold text-slate-900 outline-none transition-all placeholder:text-slate-400 hover:border-slate-300 focus:border-emerald-500 focus:bg-white focus:ring-4 focus:ring-emerald-500/10"
                   />
-                  <p className="mt-3 text-xs font-medium text-slate-400 ml-1">We'll send your secure payment link here.</p>
+                  <p className="mt-3 text-xs font-medium text-slate-400 ml-1">We&apos;ll send your secure payment link here.</p>
                 </div>
 
                 {error ? (
