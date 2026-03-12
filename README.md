@@ -2,10 +2,6 @@
 
 > A production-ready full-stack web application for browsing products with EMI plans, built with Next.js, MongoDB, and Tailwind CSS.
 
-- **Deployed Demo**: _[Insert Vercel Link here]_
-- **Demo Video**: _[Insert YouTube/Drive Link here]_
-- **GitHub Repo**: _[Insert GitHub URL here]_
-
 ---
 
 ## Tech Stack
@@ -388,7 +384,3 @@ The seed script (`scripts/seed.js`) loads `scripts/seed.json` containing:
 - **0% EMI badge** green pill indicators per the reference design
 
 ---
-
-## License
-
-This project was built as a submission for the 1Fi Full Stack Developer Assignment.
